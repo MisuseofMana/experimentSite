@@ -1,53 +1,128 @@
 <!DOCTYPE html>
 
+<!-- This should cycle through the image assets of RICK CRICK CRICK and pair them with a random phrase every few seconds. -->
+
 <head>
     <title>CRKT OS v.354</title>
 </head>
 
-
 <body>
     <div id="app">
-        <transition name="fade" mode="out-in">
-        <div v-if="seenIntro">
+        <transition name="fade">
+        <div key="1" v-if="seenIntro">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <br>
+            <div class="dot"></div>
+            <div class="dot nextDot" @click="closeIntro"></div>
+            <div class="dot"></div>
+            <br>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
         </div>
+
+        <div key="2" id="musings" v-else-if="seenBook">
+           <img width="200px;" height="200px;" :src="selectedImage" alt="SOMETHING HERE">
+           <p> {{ selectedText }} </p>
+        </div>
+
+    </div>
         </transition>
 
-        <button @click="closeIntro"></button>
+        
     </div>  
     
+    <script src="assets/js/vue.js"></script>
+    
+    <script>
+    
+    var app = new Vue({
+      el: '#app',
+      data: {
+        seenIntro: false,
+        seenBook: false,
+        images: [
+            'assets/imgs/gridicon.png',
+            'assets/imgs/lock.png',
+            'assets/imgs/creditsicon.png',
+            'assets/imgs/lighthouseicon.png',
+            'assets/imgs/pigpenicon.png',
+            'assets/imgs/trees.png',
+            'assets/imgs/willow.png'
+      ],
+      prose: [
+            'the animals you know are long extinct',
+            'all things eventually reach their full potential',
+            'someday, we will be rebuilt',
+      ],
+      selectedImage: null,
+      selectedText: null,
+    },
+    methods: {
+        closeIntro: function () {
+            randomValue = Math.floor(Math.random() * (this.iconList.length + 1))
+            this.selectedImage = this.iconList[randomValue]
+            this.seenIntro = !this.seenIntro
+        },
+        randomItem (items) {
+            return items[Math.floor(Math.random()*items.length)];
+        },
+    },
+    created() {
+        this.selectedImage = this.randomItem(this.images)
+        this.selectedText = this.randomItem(this.prose)
+    }
+    })
+
+    </script>
+
+
 </body>
 
-<script ></script>
-<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 
-<script>
-
-var app = new Vue({
-  el: '#app',
-  data: {
-    seenIntro: true,
-},
-methods: {
-    closeIntro: function () {
-        this.seenIntro = !this.seenIntro
-    },
-}
-
-})
-
-</script>
 
 <style>
 
         body {
             background:black;
+            color:aliceblue;
+        }
+
+        #app {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
         
         .fade-enter-active, .fade-leave-active {
-          transition: opacity .5s;
+          transition: opacity 2s;
         }
         .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
           opacity: 0;
+        }
+
+        .dot {
+            width:27px;
+            height:25px;
+            margin:8px;
+            border-radius: 999999px;
+            background:#333;
+            float:left;
+        }
+
+        .nextDot {
+            cursor:pointer;
+        }
+
+        .nextDot:hover {
+            background-color:#666;
+        }
+
+        #musings {
+         text-align:center;   
         }
         
 </style>

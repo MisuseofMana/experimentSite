@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<head>
+    <title>CRKT OS v.354</title>
+</head>
+
+<body>
+
+       
+        <div id="flipbook">
+                <div class="hard"><img src="assets/imgs/page1.png"></div>
+                <div class="hard"><img src="assets/imgs/page2.png"></div>
+                <div> <img src="assets/imgs/page3.png"> </div>
+                <div> <img src="assets/imgs/page4.png">  </div>
+                <div> <img src="assets/imgs/page7.png"> </div><div> <img src="assets/imgs/page5.png">  </div>
+                <div class="hard"> <img src="assets/imgs/page6.png">  </div>
+                
+            </div>
+            
+     
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="assets/js/turn.min.js"></script>
+
+<script type="text/javascript">
+	$("#flipbook").turn({
+		width: 700,
+        height: 496,
+        duration : 1500,
+		autoCenter: true
+	});
+</script>
+    
+</body>
+
+
+
+<style>
+
+        body {
+            background:black;
+            color:aliceblue;
+        }
+
+        #app {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .fade-enter-active, .fade-leave-active {
+          transition: opacity 2s;
+        }
+        .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+          opacity: 0;
+        }
+
+        .dot {
+            width:27px;
+            height:25px;
+            margin:8px;
+            border-radius: 999999px;
+            background:#333;
+            float:left;
+        }
+
+        .nextDot {
+            cursor:pointer;
+        }
+
+        .nextDot:hover {
+            background-color:#666;
+        }
+        
+</style>
