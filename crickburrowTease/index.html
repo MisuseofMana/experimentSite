@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<head>
+    <title>CRKT OS v.354</title>
+</head>
+
+
+<body>
+    <div id="app">
+        <transition name="fade" mode="out-in">
+        <div v-if="seenIntro">
+        </div>
+        </transition>
+
+        <button @click="closeIntro"></button>
+    </div>  
+    
+</body>
+
+<script ></script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<script>
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    seenIntro: true,
+},
+methods: {
+    closeIntro: function () {
+        this.seenIntro = !this.seenIntro
+    },
+}
+
+})
+
+</script>
+
+<style>
+
+        body {
+            background:black;
+        }
+        
+        .fade-enter-active, .fade-leave-active {
+          transition: opacity .5s;
+        }
+        .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+          opacity: 0;
+        }
+        
+</style>
