@@ -4,31 +4,38 @@
 
 <head>
     <title>CRKT OS v.354</title>
+    <link href="https://fonts.googleapis.com/css?family=Special+Elite" rel="stylesheet">
 </head>
 
 <body>
     <div id="app">
-        <transition name="fade">
-        <div key="1" v-if="seenIntro">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <br>
-            <div class="dot"></div>
-            <div class="dot nextDot" @click="closeIntro"></div>
-            <div class="dot"></div>
-            <br>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-        </div>
 
-        <div key="2" id="musings" v-else-if="seenBook">
-           <img width="200px;" height="200px;" :src="selectedImage" alt="SOMETHING HERE">
-           <p> {{ selectedText }} </p>
-        </div>
+        <audio id="audio" src="assets/audio/airyDrone.wav"></audio>
 
-    </div>
+        <transition appear name="fade" mode="out-in">
+
+            <div key="0" v-if="!introSeen">
+                <img style="cursor:pointer;" @click="introClicked()" src="assets/imgs/xonly.png" alt="ARE YOU PAYING ATTENTION?">
+            </div>    
+
+            <div key="1" class="musings" v-if="musing && introSeen">
+            <img :src="selectedImage" alt="">
+            <p>
+                {{ selectedMonth }} : {{ illusionTime }}
+            </p>
+            <p> {{ selectedText }} </p>
+            
+            </div>
+
+            <div key="2" class="musings" v-if="!musing && introSeen">
+                    <img :src="selectedImage" alt="">
+                    <p>
+                        {{ selectedMonth }} : {{ illusionTime }}
+                    </p>
+                    <p> {{ selectedText }} </p>
+                </div>
+
+            </div>
         </transition>
 
         
@@ -41,39 +48,100 @@
     var app = new Vue({
       el: '#app',
       data: {
-        seenIntro: false,
-        seenBook: false,
+        musing: true,
         images: [
-            'assets/imgs/gridicon.png',
-            'assets/imgs/lock.png',
-            'assets/imgs/creditsicon.png',
-            'assets/imgs/lighthouseicon.png',
-            'assets/imgs/pigpenicon.png',
-            'assets/imgs/trees.png',
-            'assets/imgs/willow.png'
+            'assets/imgs/designation-coordinate.png',
+            'assets/imgs/designation-core.png',
+            'assets/imgs/designation-credit.png',
+            'assets/imgs/designation-document.png',
+            'assets/imgs/designation-document2.png',
+            'assets/imgs/designation-fragment.png',
+            'assets/imgs/designation-grid.png',
+            'assets/imgs/designation-gridicon.png',
+            'assets/imgs/designation-illusion.png',
+            'assets/imgs/designation-lock.png',
+            'assets/imgs/designation-maze.png',
+            'assets/imgs/designation-memory.png',
+            'assets/imgs/designation-mystery.png',
+            'assets/imgs/designation-path.png',
+            'assets/imgs/designation-pigpen.png',
+            'assets/imgs/designation-signal.png',
+            'assets/imgs/designation-trees.jpg',
+            'assets/imgs/designation-willow.png',
+      ],
+      months: [
+            'JAN',
+            'FEB',
+            'MAR',
+            'Apr',
+            'May',
+            'JUNE',
+            'AUG',
+            'SEPT',
+            'NOV',
+            'DEC',
+            '\u0194 \u019D \u01A2'
       ],
       prose: [
-            'the animals you know are long extinct',
-            'all things eventually reach their full potential',
-            'someday, we will be rebuilt',
+            '\> Beginning Crickstream structure compilation',
+            '\> Marginal interference detected...stashing backups',
+            '"someday, we will be rebuilt"',
+            '\> Data copied to encrypted server encoded result resolved',
+            '\> 01100011 01110010 01101001 01100011 01101011 01100101 01110100',
+            '"time will always be on our side"',
+            '\> monoalphabetic enryption detected... mixed alphabet',
+            '\> [ pdigipdigipidig.amj ]',
+            '\> obtaining encryption key ',
+            '\> [X]Caesar, [X]:RSA, [X]Kryptos, [O]CRICKET, [X]Turing, [X]Voynich ',
+            '\> Semiotic structure unstable, progress denied.',
+            '\> Rebooting CRKT OS',
+
       ],
       selectedImage: null,
-      selectedText: null,
+      selectedText: 0,
+      selectedMonth: null,
+      selectedDay: null,
+      polling: null,
+      introSeen: false,
+      illusionTime: 1912,
+      messageCounter: 0,
+      audio: document.getElementById("audio"),
     },
     methods: {
-        closeIntro: function () {
-            randomValue = Math.floor(Math.random() * (this.iconList.length + 1))
-            this.selectedImage = this.iconList[randomValue]
-            this.seenIntro = !this.seenIntro
-        },
         randomItem (items) {
             return items[Math.floor(Math.random()*items.length)];
         },
+        pollData () {
+            this.polling = setInterval(() => {
+
+                this.musing = !this.musing
+                this.messageCounter++
+
+                this.illusionTime = this.illusionTime + 7
+
+                this.selectedImage = this.randomItem(this.images)
+                this.selectedText = this.prose[this.messageCounter]
+                this.selectedMonth = this.randomItem(this.months)
+                
+                if (this.messageCounter >= this.prose.length) {
+                    this.messageCounter = 0
+                }
+            }, 6000)
+        },
+        introClicked () {
+            this.pollData()
+            this.introSeen = !this.introSeen
+            this.audio.play();
+        },
     },
-    created() {
-        this.selectedImage = this.randomItem(this.images)
-        this.selectedText = this.randomItem(this.prose)
-    }
+        beforeDestroy () {
+            clearInterval(this.polling)
+        },
+        created () {
+                this.selectedImage = this.randomItem(this.images)
+                this.selectedText = this.prose[this.messageCounter]
+                this.selectedMonth = this.randomItem(this.months)
+        },
     })
 
     </script>
@@ -90,18 +158,23 @@
             color:aliceblue;
         }
 
+        img {
+            max-width:300px;
+        }
+
+        p {
+            text-align: center;
+            font-family: 'Special Elite';
+            text-transform:uppercase;
+        }
+
         #app {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-        }
-        
-        .fade-enter-active, .fade-leave-active {
-          transition: opacity 2s;
-        }
-        .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-          opacity: 0;
+            height:250px;
+            max-width:300px;
         }
 
         .dot {
@@ -121,8 +194,55 @@
             background-color:#666;
         }
 
-        #musings {
-         text-align:center;   
+        .musings {
+         text-align:center; 
         }
-        
+
+        /* Transitions for use with the <transition> component, these classes are applied automatically */
+/* https://v1.vuejs.org/guide/transitions.html */
+
+/* <transition name="fade"> */
+/* these are applied for the entire duration of the transition */
+.fade-enter-active,
+.fade-leave-active {
+    transform-origin: center;
+    transition: all 1s ease;
+    /* limit to just these props for performance improvements */
+    transition-property: transform, opacity;
+}
+/* applied only on the first frame the element exists (treat it as the state it is entering from) */
+.fade-enter {
+    opacity: 0;
+    transform: scale(0.95);
+}
+/* applied the first frame the element starts leaving, and kept until it is removed from the DOM */
+.fade-leave-to {
+    opacity: 0;
+    transform: scale(0.95);
+}
+.fade-move {
+    transition: all 1s ease 200ms;
+    /* limit to just these props for performance improvements */
+    transition-property: transform, opacity;
+}
+
+/* <transition name="fade-slow"> */
+.fade-slow-enter-active,
+.fade-slow-leave-active {
+    transition: all 3s ease;
+    transition-property: transform, opacity;
+}
+.fade-slow-enter {
+    opacity: 0;
+    transform: scale(0.985);
+}
+.fade-slow-leave-to{
+    opacity: 0;
+    transform: scale(0.985);
+}
+.fade-slow-move {
+    transition: all 0.5s ease;
+    transition-property: transform, opacity;
+}
+
 </style>
