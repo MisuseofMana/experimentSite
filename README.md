@@ -1,1 +1,1 @@
-## Just a little experiment website using vue.js
+## Just a little interactive experiment website using vue.js
