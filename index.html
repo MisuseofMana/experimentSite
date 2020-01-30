@@ -85,10 +85,10 @@
             '\> Marginal interference detected...stashing backups',
             '"someday, we will be rebuilt"',
             '\> Data copied to encrypted server encoded result resolved',
-            '\> 01100011 01110010 01101001 01100011 01101011 01100101 01110100',
+            '\> Have you been paying attention?',
             '"time will always be on our side"',
             '\> monoalphabetic enryption detected... mixed alphabet',
-            '\> [ pdigipdigipdig.amj ]',
+            '\> [ WBCS YMU\'VE TMULK DQL\'S TDLDQBEK YES ]',
             '\> obtaining encryption key ',
             '\> [X]Caesar, [X]:RSA, [X]Kryptos, [O]CRICKET, [X]Turing, [X]Voynich ',
             '\> Semiotic structure unstable, progress denied.',
@@ -129,6 +129,7 @@
         introClicked () {
             this.pollData()
             this.introSeen = !this.introSeen
+            this.audio.loop();
             this.audio.play();
         },
     },
