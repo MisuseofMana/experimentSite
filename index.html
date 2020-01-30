@@ -129,7 +129,7 @@
         introClicked () {
             this.pollData()
             this.introSeen = !this.introSeen
-            this.audio.loop();
+            this.audio.loop = true;
             this.audio.play();
         },
     },
