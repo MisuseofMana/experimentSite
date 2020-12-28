@@ -4,6 +4,7 @@
     <title>CRKT OS v.354</title>
     <link href="https://fonts.googleapis.com/css?family=Special+Elite" rel="stylesheet">
     <meta property="og:image" content="assets/imgs/title.jpg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="assets/js/vue.min.js"></script>
 </head>
 
@@ -36,12 +37,10 @@
                 </div>
             </div>
 
-    </transition>
-
-        
-    </div>  
+    </transition>  
+</div>  
     
-    <script>
+<script>
     
     var app = new Vue({
       el: '#app',
@@ -86,11 +85,13 @@
             '"someday, we will be rebuilt"',
             '\> Data copied to encrypted server encoded result resolved',
             '\> Have you been paying attention?',
+            '\> ',
             '"time will always be on our side"',
             '\> monoalphabetic enryption detected... mixed alphabet',
-            '\> [ WBCS YMU\'VE TMULK DQL\'S TDLDQBEK YES ]',
+            '\> [ GNN YQU TEE BEBE LEBE CT FLE FBGCN ]',
             '\> obtaining encryption key ',
             '\> [X]Caesar, [X]:RSA, [X]Kryptos, [O]CRICKET, [X]Turing, [X]Voynich ',
+            '\> [ TEED BCAD ABCAD ABCAD * AQO ]',
             '\> Semiotic structure unstable, progress denied.',
             '\> Rebooting CRKT OS',
 
@@ -145,55 +146,52 @@
     </script>
 </body>
 
-
 <style>
+body {
+    background:black;
+    color:aliceblue;
+}
 
-        body {
-            background:black;
-            color:aliceblue;
-        }
+img {
+    max-width:232px;
+}
 
-    
+p {
+    text-align: center;
+    font-family: 'Special Elite';
+    text-transform:uppercase;
+}
 
-        img {
-            max-width:232px;
-        }
+#app {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height:250px;
+    max-width:300px;
+}
 
-        p {
-            text-align: center;
-            font-family: 'Special Elite';
-            text-transform:uppercase;
-        }
+.dot {
+    width:27px;
+    height:25px;
+    margin:8px;
+    border-radius: 999999px;
+    background:#333;
+    float:left;
+}
 
-        #app {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            height:250px;
-            max-width:300px;
-        }
+.nextDot {
+    cursor:pointer;
+}
 
-        .dot {
-            width:27px;
-            height:25px;
-            margin:8px;
-            border-radius: 999999px;
-            background:#333;
-            float:left;
-        }
+.nextDot:hover {
+    background-color:#666;
+}
 
-        .nextDot {
-            cursor:pointer;
-        }
+.musings {
+    text-align:center; 
+}
 
-        .nextDot:hover {
-            background-color:#666;
-        }
-
-        .musings {
-         text-align:center; 
-        }
 .fade-enter-active,
 .fade-leave-active {
     transform-origin: center;
@@ -233,5 +231,4 @@
     transition: all 0.5s ease;
     transition-property: transform, opacity;
 }
-
 </style>
