@@ -82,10 +82,10 @@
       prose: [
             '\> Beginning Crickstream structure compilation',
             '\> Marginal interference detected...stashing backups',
-            '"someday, we will be rebuilt"',
+            '\> someday, we will be rebuilt',
             '\> Data copied to encrypted server encoded result resolved',
             '\> Have you been paying attention?',
-            '\> "time will always be on our side"',
+            '\> time will always be on our side',
             '\> monoalphabetic enryption detected... mixed alphabet',
             '\> [ GNN YQU TEE BEBE CT FLE FBGCN ]',
             '\> obtaining encryption key ',
@@ -110,21 +110,21 @@
             return items[Math.floor(Math.random()*items.length)];
         },
         pollData () {
-            this.polling = setInterval(() => {
+            this.musing = !this.musing
 
-                this.musing = !this.musing
+            this.illusionTime = this.illusionTime + 7
+
+            this.selectedImage = this.randomItem(this.images)
+            this.selectedText = this.prose[this.messageCounter]
+            this.selectedMonth = this.randomItem(this.months)
+
+            setTimeout(() => {
                 this.messageCounter++
-
-                this.illusionTime = this.illusionTime + 7
-
-                this.selectedImage = this.randomItem(this.images)
-                this.selectedText = this.prose[this.messageCounter]
-                this.selectedMonth = this.randomItem(this.months)
-                
-                if (this.messageCounter >= this.prose.length) {
+                if (this.messageCounter === this.prose.length) {
                     this.messageCounter = 0
                 }
-            }, 6000)
+                this.pollData()
+            }, 4500)
         },
         introClicked () {
             this.pollData()
@@ -137,9 +137,9 @@
             clearInterval(this.polling)
         },
         created () {
-                this.selectedImage = this.randomItem(this.images)
-                this.selectedText = this.prose[this.messageCounter]
-                this.selectedMonth = this.randomItem(this.months)
+            this.selectedImage = this.randomItem(this.images)
+            this.selectedText = this.prose[this.messageCounter]
+            this.selectedMonth = this.randomItem(this.months)
         },
     })
     </script>
